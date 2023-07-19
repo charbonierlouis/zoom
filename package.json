@@ -23,6 +23,7 @@
     "typescript": "5.1.6"
   },
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
     "daisyui": "^3.2.1",
     "eslint-config-airbnb": "^19.0.4"
   }
