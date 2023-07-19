@@ -7,11 +7,11 @@ export default function AssetsList() {
     <div className="flex flex-wrap gap-5 p-5">
       {assets.map((asset) => (
         <Link
+          key={asset.id}
           href={`/assets/${asset.id}`}
           className="w-full md:w-fit"
         >
           <div
-            key={asset.id}
             className="card shadow-xl image-full hover:scale-105 transition-all"
           >
             <figure>
