@@ -33,6 +33,7 @@ export default function Zoom({ assetInfo }: Props) {
         width={300}
         height={300}
         ref={imageRef}
+        priority
       />
     </div>
   );
