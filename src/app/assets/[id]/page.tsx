@@ -1,5 +1,5 @@
 import { findAssetById } from '@/helpers/assets';
-import { notFound } from 'next/navigation';
+import Image from 'next/image';
 
 interface Props {
   params: {
@@ -15,14 +15,16 @@ export default function AssetPage({
   const assetInfo = findAssetById(id);
 
   if (!assetInfo) {
-    notFound();
+    return null;
   }
 
   return (
-    <div>
-      <div className="w-full bg-base-200 p-10">
-        <h1 className="text-xl font-bold">{assetInfo.name}</h1>
-      </div>
-    </div>
+    <Image
+      src={assetInfo.path}
+      alt={assetInfo.name}
+      width={500}
+      height={500}
+      className="mx-auto"
+    />
   );
 }
