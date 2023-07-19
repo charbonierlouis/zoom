@@ -8,3 +8,19 @@ export function calcPourcent(
   pourcent /= size;
   return pourcent;
 }
+
+export function calcImagePourcentX(
+  element: HTMLDivElement,
+  cursorX: number,
+) {
+  const { offsetLeft, clientWidth } = element;
+  return calcPourcent(offsetLeft, clientWidth, cursorX);
+}
+
+export function calcImagePourcentY(
+  element: HTMLDivElement,
+  cursorY: number,
+) {
+  const { offsetTop, clientHeight } = element;
+  return calcPourcent(offsetTop, clientHeight, cursorY);
+}
