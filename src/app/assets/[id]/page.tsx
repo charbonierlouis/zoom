@@ -1,5 +1,5 @@
+import Zoom from '@/components/zoom';
 import { findAssetById } from '@/helpers/assets';
-import Image from 'next/image';
 
 interface Props {
   params: {
@@ -19,12 +19,6 @@ export default function AssetPage({
   }
 
   return (
-    <Image
-      src={assetInfo.path}
-      alt={assetInfo.name}
-      width={500}
-      height={500}
-      className="mx-auto"
-    />
+    <Zoom assetInfo={assetInfo} />
   );
 }
