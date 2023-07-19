@@ -1,28 +1,14 @@
 'use client';
 
-import { calcPourcent } from '@/helpers/zoom';
+import { calcImagePourcentX, calcImagePourcentY } from '@/helpers/zoom';
 import {
-  useCallback, useEffect, useMemo, useRef, useState,
+  useCallback, useEffect, useRef,
 } from 'react';
 
 export function useZoom() {
   const containerRef = useRef<HTMLDivElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
   const cursorRef = useRef<HTMLDivElement>(null);
-  const [cursorX, setCursorX] = useState<number | null>(null);
-  const [cursorY, setCursorY] = useState<number | null>(null);
-
-  const imagePourcentX = useMemo(() => {
-    if (!imageRef.current || !cursorX) return null;
-    const { offsetLeft, clientWidth } = imageRef.current;
-    return calcPourcent(offsetLeft, clientWidth, cursorX);
-  }, [cursorX]);
-
-  const imagePourcentY = useMemo(() => {
-    if (!imageRef.current || !cursorY) return null;
-    const { offsetTop, clientHeight } = imageRef.current;
-    return calcPourcent(offsetTop, clientHeight, cursorY);
-  }, [cursorY]);
 
   const handleMouseEnter = useCallback(() => {
     cursorRef.current?.classList.remove('hidden');
@@ -33,15 +19,19 @@ export function useZoom() {
   }, []);
 
   const handleMouseMove = useCallback((e: MouseEvent) => {
-    setCursorX(e.clientX);
-    setCursorY(e.clientY);
+    if (!imageRef.current || !cursorRef.current) return;
+
+    const { clientX, clientY } = e;
+    const imagePourcentX = calcImagePourcentX(imageRef.current, clientX);
+    const imagePourcentY = calcImagePourcentY(imageRef.current, clientY);
+
     cursorRef.current?.style.setProperty(
       'background-position',
       `${imagePourcentX}% ${imagePourcentY}%`,
     );
-    cursorRef.current?.style.setProperty('top', `${cursorY}px`);
-    cursorRef.current?.style.setProperty('left', `${cursorX}px`);
-  }, [cursorX, cursorY, imagePourcentX, imagePourcentY]);
+    cursorRef.current?.style.setProperty('top', `${clientY}px`);
+    cursorRef.current?.style.setProperty('left', `${clientX}px`);
+  }, [cursorRef, imageRef]);
 
   useEffect(() => {
     if (containerRef.current) {
