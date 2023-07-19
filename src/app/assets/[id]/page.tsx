@@ -1,10 +1,15 @@
 import Zoom from '@/components/zoom';
+import { assets } from '@/config/assets';
 import { findAssetById } from '@/helpers/assets';
 
 interface Props {
   params: {
     id: string;
   }
+}
+
+export function generateStaticParams() {
+  return assets.map((asset) => asset.id);
 }
 
 export default function AssetPage({
