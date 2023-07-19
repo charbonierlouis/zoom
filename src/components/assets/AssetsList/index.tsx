@@ -6,10 +6,13 @@ export default function AssetsList() {
   return (
     <div className="flex flex-wrap gap-5 p-5">
       {assets.map((asset) => (
-        <Link href={`/assets/${asset.id}`}>
+        <Link
+          href={`/assets/${asset.id}`}
+          className="w-full md:w-fit"
+        >
           <div
             key={asset.id}
-            className="card shadow-xl w-fit image-full hover:scale-105 transition-all"
+            className="card shadow-xl image-full hover:scale-105 transition-all"
           >
             <figure>
               <Image
@@ -17,6 +20,7 @@ export default function AssetsList() {
                 alt={asset.name}
                 width={250}
                 height={250}
+                priority
               />
             </figure>
             <div className="card-body items-center justify-center">
