@@ -24,7 +24,7 @@ export default function AssetLayout({
   return (
     <>
       <Header title={assetInfo.name} />
-      <main className="p-5">
+      <main className="p-5 w-full">
         {children}
       </main>
     </>
